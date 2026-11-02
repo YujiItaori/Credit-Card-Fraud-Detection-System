@@ -1,0 +1,113 @@
+{
+  "dataset_file": "creditcard.csv",
+  "row_count": 284807,
+  "column_count": 31,
+  "feature_columns": [
+    "Time",
+    "V1",
+    "V2",
+    "V3",
+    "V4",
+    "V5",
+    "V6",
+    "V7",
+    "V8",
+    "V9",
+    "V10",
+    "V11",
+    "V12",
+    "V13",
+    "V14",
+    "V15",
+    "V16",
+    "V17",
+    "V18",
+    "V19",
+    "V20",
+    "V21",
+    "V22",
+    "V23",
+    "V24",
+    "V25",
+    "V26",
+    "V27",
+    "V28",
+    "Amount"
+  ],
+  "target_column": "Class",
+  "target_classes": {
+    "0": "Legitimate transaction",
+    "1": "Fraudulent transaction"
+  },
+  "data_quality": {
+    "total_rows": 284807,
+    "total_columns": 31,
+    "columns_with_missing_values": {},
+    "total_missing_values": 0,
+    "duplicate_row_count": 1081,
+    "duplicate_row_percentage": 0.379555277784605
+  },
+  "class_distribution": {
+    "legitimate_count": 284315,
+    "fraudulent_count": 492,
+    "legitimate_percentage": 99.82725143693798,
+    "fraudulent_percentage": 0.1727485630620034,
+    "fraud_to_legitimate_ratio": 0.0017304750013189597
+  },
+  "amount_statistics_by_class": {
+    "count": {
+      "Legitimate (0)": 284315,
+      "Fraudulent (1)": 492
+    },
+    "mean": {
+      "Legitimate (0)": 88.29102242231328,
+      "Fraudulent (1)": 122.21132113821139
+    },
+    "median": {
+      "Legitimate (0)": 22.0,
+      "Fraudulent (1)": 9.25
+    },
+    "std": {
+      "Legitimate (0)": 250.1050922258941,
+      "Fraudulent (1)": 256.68328829771207
+    },
+    "minimum": {
+      "Legitimate (0)": 0.0,
+      "Fraudulent (1)": 0.0
+    },
+    "maximum": {
+      "Legitimate (0)": 25691.16,
+      "Fraudulent (1)": 2125.87
+    },
+    "p25": {
+      "Legitimate (0)": 5.65,
+      "Fraudulent (1)": 1.0
+    },
+    "p75": {
+      "Legitimate (0)": 77.05,
+      "Fraudulent (1)": 105.89
+    },
+    "p95": {
+      "Legitimate (0)": 364.40899999999965,
+      "Fraudulent (1)": 640.9049999999999
+    },
+    "p99": {
+      "Legitimate (0)": 1016.9663999999966,
+      "Fraudulent (1)": 1357.427899999999
+    }
+  },
+  "time_statistics": {
+    "minimum_seconds": 0.0,
+    "maximum_seconds": 172792.0,
+    "duration_hours": 47.99777777777778,
+    "mean_seconds": 94813.85957508067,
+    "median_seconds": 84692.0,
+    "standard_deviation_seconds": 47488.14595456617
+  },
+  "dataset_limitations": [
+    "V1 to V28 are anonymized PCA-transformed features with no known business meanings.",
+    "The dataset does not include customer, merchant, location, or transaction-category information.",
+    "Time is elapsed seconds from the first transaction, not a calendar timestamp.",
+    "The dataset is extremely imbalanced, so accuracy alone is not an appropriate evaluation metric."
+  ]
+}

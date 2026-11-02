@@ -79,9 +79,8 @@ models/anomaly/baseline_anomaly_models/isolation_forest_baseline/*
 # Reports
 # Keep the final evaluation report and figures
 # ==========================================
-reports/*
+reports/prediction_results.csv
 !reports/model_evaluation_report.md
-!reports/figures/
 
 # ==========================================
 # Prediction outputs and temporary exports

@@ -1,0 +1,19 @@
+{
+  "selected_threshold": 0.38,
+  "selection_rationale": "Selected the threshold with the highest validation F1-score.",
+  "validation_metrics": {
+    "threshold": 0.38,
+    "precision": 0.9642857142857143,
+    "recall": 0.7605633802816901,
+    "f1_score": 0.8503937007874016,
+    "pr_auc": 0.8494236979385934,
+    "roc_auc": 0.9455992213874473,
+    "false_positive_rate": 4.7072114479382414e-05,
+    "true_positives": 54.0,
+    "false_positives": 2.0,
+    "true_negatives": 42486.0,
+    "false_negatives": 17.0,
+    "transactions_flagged": 56.0
+  },
+  "test_set_used": false
+}
