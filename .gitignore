@@ -1,0 +1,110 @@
+
+# ==========================================
+# Python cache and compiled files
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ==========================================
+# Virtual environments
+# ==========================================
+venv/
+.venv/
+env/
+ENV/
+stocks_vnv/
+
+# ==========================================
+# Environment variables and secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+
+.streamlit/secrets.toml
+secrets.toml
+
+# ==========================================
+# Jupyter Notebook temporary files
+# ==========================================
+.ipynb_checkpoints/
+
+# ==========================================
+# Raw and processed datasets
+# ==========================================
+data/*
+!data/prediction_input_sample.csv
+
+# ==========================================
+# MLflow experiment tracking
+# ==========================================
+mlruns/
+notebooks/mlruns/
+mlflow.db
+*.db
+*.sqlite
+*.sqlite3
+
+# ==========================================
+# Model artifacts
+# Keep ONLY the final application models
+# ==========================================
+models/*
+
+!models/supervised/
+!models/anomaly/
+
+# Final supervised model
+models/supervised/*
+!models/supervised/final_supervised_model/
+
+models/supervised/final_supervised_model/*
+!models/supervised/final_supervised_model/metadata.json
+!models/supervised/final_supervised_model/model.joblib
+
+# Isolation Forest anomaly model
+models/anomaly/*
+!models/anomaly/baseline_anomaly_models/
+
+models/anomaly/baseline_anomaly_models/*
+!models/anomaly/baseline_anomaly_models/isolation_forest_baseline/
+
+models/anomaly/baseline_anomaly_models/isolation_forest_baseline/*
+!models/anomaly/baseline_anomaly_models/isolation_forest_baseline/metadata.json
+!models/anomaly/baseline_anomaly_models/isolation_forest_baseline/model.joblib
+
+# ==========================================
+# Reports
+# Keep the final evaluation report and figures
+# ==========================================
+reports/*
+!reports/model_evaluation_report.md
+!reports/figures/
+
+# ==========================================
+# Prediction outputs and temporary exports
+# ==========================================
+fraud_predictions.csv
+prediction_results.csv
+data/fraud_predictions.csv
+data/prediction_input.csv
+
+# ==========================================
+# Logs and temporary files
+# ==========================================
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# ==========================================
+# IDE and editor files
+# ==========================================
+.vscode/
+.idea/
+*.suo
+*.user
+*.code-workspace

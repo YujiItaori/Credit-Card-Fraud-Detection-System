@@ -1,0 +1,150 @@
+/* Credit Card Fraud Detection System - Streamlit styles */
+
+:root {
+    --primary-color: #1f4e79;
+    --secondary-color: #f2f6fa;
+    --success-color: #1e7d46;
+    --warning-color: #b26a00;
+    --danger-color: #b3261e;
+    --text-color: #1f2933;
+    --muted-text-color: #5b6773;
+    --card-border-color: #d9e2ec;
+}
+
+/* Page header */
+
+.page-header {
+    background: linear-gradient(135deg, #1f4e79, #2d6da3);
+    color: #ffffff;
+    padding: 1.5rem 1.75rem;
+    border-radius: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 700;
+}
+
+.page-header p {
+    margin: 0.5rem 0 0 0;
+    color: #e6f0fa;
+    font-size: 1rem;
+}
+
+/* Metric cards */
+
+.metric-card {
+    background-color: #ffffff;
+    border: 1px solid var(--card-border-color);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    height: 100%;
+}
+
+.metric-label {
+    margin: 0;
+    color: var(--muted-text-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.metric-value {
+    margin: 0.35rem 0 0 0;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.metric-help {
+    margin: 0.35rem 0 0 0;
+    color: var(--muted-text-color);
+    font-size: 0.85rem;
+}
+
+/* Prediction result */
+
+.prediction-result {
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    border: 1px solid var(--card-border-color);
+}
+
+.prediction-fraud {
+    background-color: #fdecea;
+    border-color: #f5c6c2;
+}
+
+.prediction-legitimate {
+    background-color: #eaf6ef;
+    border-color: #bfe3cd;
+}
+
+.prediction-result h2 {
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.prediction-fraud h2 {
+    color: var(--danger-color);
+}
+
+.prediction-legitimate h2 {
+    color: var(--success-color);
+}
+
+.prediction-score,
+.prediction-threshold {
+    margin: 0.5rem 0 0 0;
+    color: var(--text-color);
+}
+
+.prediction-review {
+    margin: 0.75rem 0 0 0;
+    font-weight: 600;
+}
+
+.review-required {
+    color: var(--warning-color);
+}
+
+.review-not-required {
+    color: var(--muted-text-color);
+}
+
+/* Anomaly result */
+
+.anomaly-result {
+    border-radius: 0.75rem;
+    padding: 1.1rem 1.4rem;
+    margin: 1rem 0;
+    border: 1px solid var(--card-border-color);
+}
+
+.anomaly-detected {
+    background-color: #fff7e0;
+    border-color: #f0d9a2;
+}
+
+.anomaly-not-detected {
+    background-color: #f2f6fa;
+    border-color: #d9e2ec;
+}
+
+.anomaly-result h3 {
+    margin: 0;
+    color: var(--text-color);
+}
+
+.anomaly-result p {
+    margin: 0.4rem 0 0 0;
+    color: var(--text-color);
+}
+
+.anomaly-note {
+    color: var(--muted-text-color);
+    font-size: 0.9rem;
+}
