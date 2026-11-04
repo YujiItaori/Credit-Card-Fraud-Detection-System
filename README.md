@@ -84,7 +84,7 @@ The application is organized into three main layers:
 ## Project structure
 
 
-.
+###
 ├── api/
 │   ├── __init__.py
 │   ├── main.py
@@ -428,6 +428,7 @@ The application is organized into three main layers:
 ├── mlflow.db
 ├── README.md
 └── requirements.txt
+###
 
 
 ## Installation
