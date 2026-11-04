@@ -84,37 +84,350 @@ The application is organized into three main layers:
 ## Project structure
 
 
-```text
 .
 ├── api/
+│   ├── __init__.py
 │   ├── main.py
 │   ├── routes.py
 │   └── schemas.py
+│
 ├── app/
+│   ├── __init__.py
 │   ├── api_client.py
 │   ├── streamlit_app.py
-│   └── styles.css
+│   ├── styles.css
+│   ├── components/
+│   │   └── __init__.py
+│   └── pages/
+│       ├── 1_Fraud_Dashboard.py
+│       ├── 2_Transaction_Investigation.py
+│       ├── 3_Anomaly_Analysis.py
+│       ├── 4_Model_Evaluation.py
+│       └── 5_Monitoring.py
+│
+├── configs/
+│   └── config.yaml
+│
 ├── data/
+│   ├── monitoring_prediction_results_sample.csv
+│   ├── prediction_input.csv
 │   ├── prediction_input_sample.csv
-│   └── monitoring_prediction_results_sample.csv
+│   ├── raw/
+│   │   ├── archive.zip
+│   │   └── creditcard.csv
+│   └── processed/
+│       ├── split_metadata.json
+│       ├── train/
+│       │   ├── X_train.parquet
+│       │   └── y_train.parquet
+│       ├── validation/
+│       │   ├── X_validation.parquet
+│       │   └── y_validation.parquet
+│       └── test/
+│           ├── X_test.parquet
+│           └── y_test.parquet
+│
+├── models/
+│   ├── anomaly/
+│   │   └── baseline_anomaly_models/
+│   │       ├── isolation_forest_baseline/
+│   │       │   ├── metadata.json
+│   │       │   └── model.joblib
+│   │       └── local_outlier_factor_baseline/
+│   │           ├── metadata.json
+│   │           └── model.joblib
+│   │
+│   └── supervised/
+│       ├── baseline_logistic_regression/
+│       │   ├── baseline_logistic_regression.joblib
+│       │   └── baseline_metadata.json
+│       │
+│       ├── baseline_models/
+│       │   ├── lightgbm/
+│       │   │   ├── metadata.json
+│       │   │   └── model.joblib
+│       │   ├── logistic_regression/
+│       │   │   ├── metadata.json
+│       │   │   └── model.joblib
+│       │   └── random_forest/
+│       │       ├── metadata.json
+│       │       └── model.joblib
+│       │
+│       ├── class_imbalance_models/
+│       │   ├── lightgbm_positive_class_weighting/
+│       │   │   ├── metadata.json
+│       │   │   └── model.joblib
+│       │   ├── logistic_regression_class_weighting/
+│       │   │   ├── metadata.json
+│       │   │   └── model.joblib
+│       │   ├── logistic_regression_smote/
+│       │   │   ├── metadata.json
+│       │   │   └── model.joblib
+│       │   ├── random_forest_class_weighting/
+│       │   │   ├── metadata.json
+│       │   │   └── model.joblib
+│       │   └── random_forest_smote/
+│       │       ├── metadata.json
+│       │       └── model.joblib
+│       │
+│       ├── tuned_models/
+│       │   └── random_forest_class_weighting/
+│       │       ├── optuna_study_results.csv
+│       │       ├── tuned_model.joblib
+│       │       └── tuning_metadata.json
+│       │
+│       └── final_supervised_model/
+│           ├── metadata.json
+│           └── model.joblib
+│
+├── notebooks/
+│   ├── 01_data_understanding.ipynb
+│   ├── 02_eda.ipynb
+│   ├── 03_data_cleaning.ipynb
+│   ├── 04_feature_engineering.ipynb
+│   ├── 05_baseline_models.ipynb
+│   ├── 06_class_imbalance.ipynb
+│   ├── 07_supervised_learning.ipynb
+│   ├── 08_anomaly_detection.ipynb
+│   ├── 09_model_evaluation.ipynb
+│   ├── 10_shap_explainability.ipynb
+│   ├── 11_mlflow_tracking.ipynb
+│   └── mlruns/
+│       └── 1/
+│           ├── 243f72fe5ebd4625bfad0abff6efd5dd/
+│           │   └── artifacts/
+│           │       ├── metadata/
+│           │       │   └── experiment_record.json
+│           │       └── reports/
+│           │           ├── anomaly_detection_report.md
+│           │           ├── class_imbalance_report.md
+│           │           ├── model_agreement_analysis.csv
+│           │           ├── shap_explainability_report.md
+│           │           ├── supervised_candidate_selection_report.md
+│           │           └── supervised_vs_anomaly_comparison.csv
+│           │
+│           ├── 2719890a69db4230877e3ed3bb6d6a76/
+│           │   └── artifacts/
+│           │       ├── metadata/
+│           │       │   └── experiment_record.json
+│           │       └── reports/
+│           │           ├── anomaly_detection_report.md
+│           │           ├── class_imbalance_report.md
+│           │           ├── model_agreement_analysis.csv
+│           │           ├── shap_explainability_report.md
+│           │           ├── supervised_candidate_selection_report.md
+│           │           └── supervised_vs_anomaly_comparison.csv
+│           │
+│           ├── 36723fd06c664c01af482203907f7f95/
+│           │   └── artifacts/
+│           │       ├── model/
+│           │       │   └── model.joblib
+│           │       └── model_metadata/
+│           │           └── metadata.json
+│           │
+│           ├── 5d2e05582a76427590eb675fd09e38fb/
+│           │   └── artifacts/
+│           │       ├── metadata/
+│           │       │   └── experiment_record.json
+│           │       └── reports/
+│           │           ├── anomaly_detection_report.md
+│           │           ├── class_imbalance_report.md
+│           │           ├── model_agreement_analysis.csv
+│           │           ├── shap_explainability_report.md
+│           │           ├── supervised_candidate_selection_report.md
+│           │           └── supervised_vs_anomaly_comparison.csv
+│           │
+│           ├── 7fc3b089c9c84700b8f56ead344b7a0a/
+│           │   └── artifacts/
+│           │       ├── metadata/
+│           │       │   └── experiment_record.json
+│           │       └── reports/
+│           │           ├── anomaly_detection_report.md
+│           │           ├── class_imbalance_report.md
+│           │           ├── model_agreement_analysis.csv
+│           │           ├── shap_explainability_report.md
+│           │           ├── supervised_candidate_selection_report.md
+│           │           └── supervised_vs_anomaly_comparison.csv
+│           │
+│           ├── b8ba0c7213a54bc58ccbbc592b07a2c2/
+│           │   └── artifacts/
+│           │       ├── metadata/
+│           │       │   └── experiment_record.json
+│           │       └── reports/
+│           │           ├── anomaly_detection_report.md
+│           │           ├── class_imbalance_report.md
+│           │           ├── model_agreement_analysis.csv
+│           │           ├── shap_explainability_report.md
+│           │           ├── supervised_candidate_selection_report.md
+│           │           └── supervised_vs_anomaly_comparison.csv
+│           │
+│           ├── c0bef3a4cd834db088d8b02655ae43b7/
+│           │   └── artifacts/
+│           │       └── reports/
+│           │           ├── anomaly_detection_report.md
+│           │           ├── class_imbalance_report.md
+│           │           ├── model_agreement_analysis.csv
+│           │           ├── shap_explainability_report.md
+│           │           ├── supervised_candidate_selection_report.md
+│           │           └── supervised_vs_anomaly_comparison.csv
+│           │
+│           ├── d138137788774988b80012767a1b3a40/
+│           │   └── artifacts/
+│           │       ├── metadata/
+│           │       │   └── experiment_record.json
+│           │       └── reports/
+│           │           ├── anomaly_detection_report.md
+│           │           ├── class_imbalance_report.md
+│           │           ├── model_agreement_analysis.csv
+│           │           ├── shap_explainability_report.md
+│           │           ├── supervised_candidate_selection_report.md
+│           │           └── supervised_vs_anomaly_comparison.csv
+│           │
+│           └── e0601f75ffa64e7ab31c03b6e5b82fb3/
+│               └── artifacts/
+│                   ├── metadata/
+│                   │   └── experiment_record.json
+│                   └── reports/
+│                       ├── anomaly_detection_report.md
+│                       ├── class_imbalance_report.md
+│                       ├── model_agreement_analysis.csv
+│                       ├── shap_explainability_report.md
+│                       ├── supervised_candidate_selection_report.md
+│                       └── supervised_vs_anomaly_comparison.csv
+│
+├── reports/
+│   ├── anomaly_detection_report.md
+│   ├── class_imbalance_report.md
+│   ├── data_cleaning_decision_log.md
+│   ├── data_quality_report.md
+│   ├── eda_report.md
+│   ├── feature_engineering_report.md
+│   ├── final_test_metrics.json
+│   ├── mlflow_tracking_report.md
+│   ├── model_agreement_analysis.csv
+│   ├── model_comparison.csv
+│   ├── model_evaluation_report.md
+│   ├── phase1_data_understanding_summary.json
+│   ├── prediction_results.csv
+│   ├── sample_prediction_input.csv
+│   ├── selected_threshold.json
+│   ├── shap_explainability_report.md
+│   ├── supervised_baseline_report.md
+│   ├── supervised_candidate_selection_report.md
+│   ├── supervised_candidate_shortlist.csv
+│   ├── supervised_error_analysis_report.md
+│   ├── supervised_vs_anomaly_comparison.csv
+│   ├── threshold_optimization_results.csv
+│   └── figures/
+│       ├── amount_log1p_transformation.png
+│       ├── anomaly_confusion_matrix_isolation_forest_baseline.png
+│       ├── anomaly_confusion_matrix_local_outlier_factor_baseline.png
+│       ├── anomaly_precision_recall_curves.png
+│       ├── anomaly_roc_curves.png
+│       ├── anomaly_score_distributions.png
+│       ├── baseline_confusion_matrix_log_amount_and_time_hours.png
+│       ├── baseline_confusion_matrix_original_features.png
+│       ├── baseline_confusion_matrix_original_plus_log_amount.png
+│       ├── baseline_precision_recall_curves.png
+│       ├── baseline_roc_curves.png
+│       ├── class_distribution.png
+│       ├── class_imbalance_confusion_matrix_lightgbm_positive_class_weighting.png
+│       ├── class_imbalance_confusion_matrix_logistic_regression_class_weighting.png
+│       ├── class_imbalance_confusion_matrix_logistic_regression_smote.png
+│       ├── class_imbalance_confusion_matrix_random_forest_class_weighting.png
+│       ├── class_imbalance_confusion_matrix_random_forest_smote.png
+│       ├── class_imbalance_precision_recall_curves.png
+│       ├── class_imbalance_roc_curves.png
+│       ├── correlation_heatmap.png
+│       ├── feature_distributions_by_class.png
+│       ├── feature_distributions_group_1.png
+│       ├── feature_distributions_group_2.png
+│       ├── feature_distributions_group_3.png
+│       ├── feature_distributions_group_4.png
+│       ├── final_test_confusion_matrix.png
+│       ├── final_test_precision_recall_curve.png
+│       ├── final_test_roc_curve.png
+│       ├── fraud_rate_by_time_interval.png
+│       ├── lightgbm_baseline_confusion_matrix.png
+│       ├── logistic_regression_baseline_confusion_matrix.png
+│       ├── potential_outliers.png
+│       ├── random_forest_baseline_confusion_matrix.png
+│       ├── shap_false_negative_explanation.png
+│       ├── shap_false_positive_explanation.png
+│       ├── shap_feature_importance.png
+│       ├── shap_summary.png
+│       ├── shap_true_positive_explanation.png
+│       ├── supervised_baseline_precision_recall_curves.png
+│       ├── supervised_baseline_roc_curves.png
+│       ├── supervised_candidate_score_distributions.png
+│       ├── supervised_vs_anomaly_agreement.png
+│       ├── supervised_vs_anomaly_precision_recall_curves.png
+│       ├── supervised_vs_anomaly_roc_curves.png
+│       ├── time_distribution.png
+│       ├── time_distribution_by_class.png
+│       ├── transaction_amount_boxplot.png
+│       ├── transaction_amount_by_class.png
+│       └── transaction_amount_distribution.png
+│
 ├── scripts/
-│   └── generate_prediction_input_sample.py
+│   ├── generate_prediction_input_sample.py
+│   └── run_prediction.py
+│
 ├── src/
+│   ├── __init__.py
 │   ├── data/
+│   │   ├── __init__.py
+│   │   ├── clean_data.py
+│   │   ├── load_data.py
+│   │   └── validate_data.py
+│   │
+│   ├── evaluation/
+│   │   ├── __init__.py
+│   │   ├── error_analysis.py
+│   │   ├── metrics.py
+│   │   ├── model_comparison.py
+│   │   └── threshold_optimization.py
+│   │
+│   ├── explainability/
+│   │   ├── __init__.py
+│   │   └── shap_explainer.py
+│   │
+│   ├── features/
+│   │   ├── __init__.py
+│   │   └── feature_engineering.py
+│   │
 │   ├── models/
+│   │   ├── __init__.py
+│   │   ├── model_loader.py
+│   │   ├── predict.py
+│   │   ├── train_anomaly.py
+│   │   ├── train_supervised.py
+│   │   └── tune_hyperparameters.py
+│   │
+│   ├── monitoring/
+│   │   ├── __init__.py
+│   │   ├── drift_detection.py
+│   │   ├── prediction_monitor.py
+│   │   └── reference_profile.py
+│   │
 │   └── preprocessing/
+│       ├── __init__.py
+│       └── preprocessing_pipeline.py
+│
 ├── tests/
+│   ├── __init__.py
 │   ├── test_api.py
 │   ├── test_api_client.py
 │   ├── test_data_validation.py
 │   ├── test_predictions.py
 │   └── test_preprocessing.py
-├── models/
-├── reports/
+│
 ├── .env.example
-├── requirements.txt
-└── README.md
-```
+├── .gitignore
+├── LICENSE
+├── mlflow.db
+├── README.md
+└── requirements.txt
 
 
 ## Installation
