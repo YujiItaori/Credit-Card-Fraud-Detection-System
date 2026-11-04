@@ -70,6 +70,8 @@ FEATURE_COLUMNS = [
 
 REQUIRED_FEATURE_COLUMNS = FEATURE_COLUMNS
 
+SAMPLE_PREDICTION_INPUT_PATH = Path("data") / "prediction_input_sample.csv"
+
 st.set_page_config(
     page_title=APP_TITLE,
     page_icon="💳",
@@ -755,6 +757,13 @@ def render_single_prediction_page() -> None:
             st.error(str(error))
 
 
+def load_sample_prediction_input() -> bytes | None:
+    """Load the downloadable sample prediction-input CSV, if available."""
+    if not SAMPLE_PREDICTION_INPUT_PATH.exists():
+        return None
+
+    return SAMPLE_PREDICTION_INPUT_PATH.read_bytes()
+
 def render_batch_prediction_page() -> None:
     """Render the CSV batch-prediction page."""
     display_page_header(
@@ -773,6 +782,40 @@ def render_batch_prediction_page() -> None:
             "anomaly prediction for every transaction."
         ),
     )
+
+    sample_csv_bytes = load_sample_prediction_input()
+
+    if sample_csv_bytes is not None:
+        with st.expander("Download sample prediction input", expanded=True):
+            st.markdown(
+                """
+                This sample file contains **1,000 real transactions** selected
+                from the original European Credit Card Fraud Detection dataset.
+                It includes both legitimate and fraudulent examples.
+
+                Download the file, upload it using the CSV uploader below, and
+                run batch predictions. The file contains the 30 original model
+                input features and intentionally does **not** include the
+                `Class` target column.
+
+                The sample is curated to include both classes, so its class
+                distribution is not representative of real-world transaction
+                distributions.
+                """
+            )
+
+            st.download_button(
+                label="Download prediction_input_sample.csv",
+                data=sample_csv_bytes,
+                file_name="prediction_input_sample.csv",
+                mime="text/csv",
+            )
+    else:
+        st.warning(
+            "Sample prediction input file not found: "
+            f"`{SAMPLE_PREDICTION_INPUT_PATH}`. "
+            "Run `python scripts/generate_prediction_input_sample.py` to create it."
+        )
 
     uploaded_file = st.file_uploader(
         "Upload transaction CSV",
