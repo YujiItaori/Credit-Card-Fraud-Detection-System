@@ -15,7 +15,7 @@ maintaining a practical precision level.
 
 
 - **Streamlit dashboard:**  
-  [Open the Credit Card Fraud Detection System](https://credit-card-fraud-detection-system.streamlit.app/)
+  [Open the Credit Card Fraud Detection System](https://credit-card-fraud-detection-systemgit-fenwbtjaoddr3jsbzwxct3.streamlit.app/)
 
 - **FastAPI service:**  
   [https://credit-card-fraud-detection-system-ojfs.onrender.com](https://credit-card-fraud-detection-system-ojfs.onrender.com)
