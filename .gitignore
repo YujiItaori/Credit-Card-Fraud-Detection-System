@@ -36,6 +36,7 @@ secrets.toml
 # ==========================================
 data/*
 !data/prediction_input_sample.csv
+!data/monitoring_prediction_results_sample.csv.csv
 
 # ==========================================
 # MLflow experiment tracking
